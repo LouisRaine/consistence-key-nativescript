@@ -1,0 +1,17 @@
+<GridLayout rows="*,*,3*" columns="*" class="home" height="100%" width="100%" backgroundImage="~/imgs/graph-paper.png">
+
+    <Label col="0" row="0" class="title" text="ConsistenceKey"></Label>
+
+    <Label col="0" row="1" class="sub-title" text="Consistency is key"></Label>
+
+    <Button *ngIf="workoutVisible" class="circle red" text="Log Workout" col="0" row="3"
+            height="150" width="150" color="white" (tap)="onWorkout()"></Button>
+
+    <StackLayout class="choices" orientation="horizontal" *ngIf="choicesVisible" col="0" row="3">
+        <Button class="circle yellow" text="Weight Training"
+                height="150" width="150" color="white" (tap)="onLift()"></Button>
+        <Button class="circle grey-blue" text="Cardio"
+                height="150" width="150" color="white" (tap)="onCardio()"></Button>
+    </StackLayout>
+
+</GridLayout>

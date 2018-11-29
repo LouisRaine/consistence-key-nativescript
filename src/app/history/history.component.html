@@ -1,0 +1,18 @@
+<StackLayout class="home" height="100%" width="100%" backgroundImage="~/imgs/graph-paper.png">
+    <StackLayout class="streak-banner" borderColor="#f16d6d" borderWidth="20px" width="90%">
+        <Label class="streak-label" text="Current Streak {{ currentStreak }}"></Label>
+    </StackLayout>
+    <ListView [items]="workouts" class="list-group workouts" backgroundImage="~/imgs/graph-paper.png" height="76%">
+        <ng-template let-item="item">
+            <StackLayout orientation="horizontal" width="90%">
+                <Button [backgroundColor]="getColor(item.workoutType)" class="circle"></Button>
+                <Label [text]="item.workoutType" class="list-group-item workout-label"></Label>
+                <Label text="{{ item.datetime }}" class="workout-label"></Label>
+            </StackLayout>
+        </ng-template>
+    </ListView>
+    <StackLayout width="90%">
+        <Button class="clear-button" text="Clear Workouts" (tap)="clearWorkouts()"
+                borderColor="#f16d6d" borderWidth="8px" borderRadius="20px" padding="12px"></Button>
+    </StackLayout>
+</StackLayout>

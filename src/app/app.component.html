@@ -1,0 +1,13 @@
+<TabView androidTabsPosition="bottom">
+
+    <page-router-outlet
+        *tabItem="{title: 'Log Workout', iconSource: getIconSource('home')}"
+        name="logWorkoutTab">
+    </page-router-outlet>
+
+    <page-router-outlet
+        *tabItem="{title: 'History', iconSource: getIconSource('browse')}"
+        name="historyTab">
+    </page-router-outlet>
+
+</TabView>
