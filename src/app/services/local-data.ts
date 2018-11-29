@@ -31,7 +31,7 @@ export class LocalData {
   clear() {
       let empty = [];
       ApplicationSettings.setString("data", JSON.stringify(empty));
-      this.localDataUpdatedSource.next("workoutSaved");
+      this.localDataUpdatedSource.next("workoutsCleared");
   }
 
 }
