@@ -2,7 +2,7 @@
     <StackLayout class="streak-banner" borderColor="#f16d6d" borderWidth="20px" width="90%">
         <Label class="streak-label" text="Current Streak {{ currentStreak }}"></Label>
     </StackLayout>
-    <ListView [items]="workouts" class="list-group workouts" backgroundImage="~/imgs/graph-paper.png" height="76%">
+    <ListView [items]="workouts" class="list-group workouts" height="76%">
         <ng-template let-item="item">
             <StackLayout orientation="horizontal" width="90%">
                 <Button [backgroundColor]="getColor(item.workoutType)" class="circle"></Button>
