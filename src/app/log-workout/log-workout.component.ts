@@ -54,16 +54,13 @@ export class LogWorkoutComponent {
             (lastWorkoutDate == today && lastWorkoutType == workoutType) 
             || (secondedToLastWorkoutDate == today && secondedToLastWorkoutType == workoutType)
         ) {
-            console.log(workoutType, true)
             return true;
         } else {
-            console.log(workoutType, false)
             return false
         }
     }
 
     onWorkout(): void {
-        console.log("cardio disabled" + this.disableCardio,"weightTraining disabled" +  this.disableWeightTraining)
         if (!this.disableCardio || !this.disableWeightTraining) {
             this.workoutVisible = false;
             this.choicesVisible = true;
@@ -74,7 +71,6 @@ export class LogWorkoutComponent {
 
     onLift(): void {
         if (!this.disableWeightTraining) {
-            console.log("on lift");
             let workout: Workout = {
                 workoutType: 'weightTraining',
                 datetime: moment().toISOString(),
