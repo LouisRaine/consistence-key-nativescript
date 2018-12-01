@@ -1,34 +1,32 @@
 import {Injectable} from "@angular/core";
 import * as ApplicationSettings from "application-settings";
 import { Subject } from 'rxjs';
+import { Workout } from "~/app/history/history.component";
 
 @Injectable()
 export class LocalData {
 
-  storage: any;
+  private storage: Workout[];
 
   private localDataUpdatedSource = new Subject<string>();
   localDataUpdated$ = this.localDataUpdatedSource.asObservable();
-
-  constructor(
-  ) { }
 
   setup() {
       this.storage = JSON.parse(ApplicationSettings.getString("data", "[]"));
   }
 
-  loadData() {
+  loadData(): Workout[] {
       return this.storage = JSON.parse(ApplicationSettings.getString("data", "[]"));
   }
 
-  save(workout) {
+  save(workout: Workout): void {
       this.storage = this.loadData();
       this.storage.push(workout);
       ApplicationSettings.setString("data", JSON.stringify(this.storage));
       this.localDataUpdatedSource.next("workoutSaved");
   }
 
-  clear() {
+  clear(): void {
       let empty = [];
       ApplicationSettings.setString("data", JSON.stringify(empty));
       this.localDataUpdatedSource.next("workoutsCleared");

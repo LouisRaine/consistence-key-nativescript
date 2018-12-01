@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
-import {LocalData} from "~/app/services/local-data";
+import { LocalData } from "~/app/services/local-data";
 import { Subscription } from 'rxjs';
+import * as moment from 'moment';
 
 @Component({
     selector: "History",
@@ -10,16 +11,19 @@ import { Subscription } from 'rxjs';
 })
 export class HistoryComponent {
 
-    workouts: any[];
+    workouts: Workout[];
 
     workoutAdded: Subscription;
 
     currentStreak: number = 0;
 
+    daysText: string = '';
+
+    todaysWorkoutNotYetLogged: boolean = true;
+
     constructor(
         private localData: LocalData
-    ) {
-    }
+    ) { }
 
     ngOnInit(): void {
         this.workoutAdded = this.localData.localDataUpdated$.subscribe((res) => {
@@ -31,25 +35,74 @@ export class HistoryComponent {
         this.workouts = [];
         this.workouts = this.localData.loadData();
         this.setCurrentStreak(this.workouts);
-
     }
 
-    getColor(workoutType) {
+    getColor(workoutType: string): string {
         switch (workoutType) {
             case 'weightTraining':
-                return '#fdd68b';
+                return 'yellow';
             case 'cardio':
-                return '#6f8c9e';
+                return 'grey-blue';
         }
     }
 
-    setCurrentStreak(workouts) {
-        if (workouts) {
-            this.currentStreak = workouts.length;
+    setCurrentStreak(workouts: Workout[]): void {
+
+        if (workouts && workouts.length != 0) {
+            let today = moment().format('YYYY-MM-DD');
+            let yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD');
+            if (moment(workouts[0].datetime).format('YYYY-MM-DD') == yesterday) {
+                this.todaysWorkoutNotYetLogged = false;
+                today = yesterday;
+            }
+            let streak = 0;
+
+            for (let workout of workouts) {
+                let day = moment(workout.datetime).format('YYYY-MM-DD');
+                if (day == moment(today, 'YYYY-MM-DD').subtract(streak, 'days').format('YYYY-MM-DD')) {
+                    streak++
+                } else if (
+                    day == moment(today, 'YYYY-MM-DD').subtract(streak - 1, 'days').format('YYYY-MM-DD')
+                ) {
+                    //  streak count already added therefore do nothing
+                } else {
+                    break;
+                }
+            }
+            this.currentStreak = streak;
+        } else {
+            this.currentStreak = 0;
+        }
+        this.daysText = this.days();
+    }
+
+    days() {
+        switch (this.currentStreak) {
+            case 1:
+                return 'day';
+            default:
+                return 'days';
         }
     }
 
-    clearWorkouts() {
+
+
+
+    formatDateDay(date: string): string {
+        return moment(date).format('DD');
+    }
+
+    formatDateMonth(date: string): string {
+        return moment(date).format('MMM');
+    }
+
+    clearWorkouts(): void {
         this.localData.clear()
     }
+}
+
+export interface Workout {
+    workoutType: string,
+    datetime: string,
+    workoutDesc: string
 }
