@@ -9,7 +9,7 @@
 
     <StackLayout class="choices" orientation="horizontal" *ngIf="choicesVisible" col="0" row="3">
         <Button class="circle" [ngClass]="disableWeightTraining ? 'disabled' : 'yellow'" text="Weight Training" marginLeft="70px"
-                height="150" width="150" color="white" (tap)="onLift()"></Button>
+                height="150" width="150" color="white" (tap)="onWeightTraining()"></Button>
         <Button class="circle" [ngClass]="disableCardio ? 'disabled' : 'grey-blue'" text="Cardio"
                 height="150" width="150" color="white" (tap)="onCardio()"></Button>
     </StackLayout>

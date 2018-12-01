@@ -69,7 +69,7 @@ export class LogWorkoutComponent {
         }
     }
 
-    onLift(): void {
+    onWeightTraining(): void {
         if (!this.disableWeightTraining) {
             let workout: Workout = {
                 workoutType: 'weightTraining',
