@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { LocalData } from "~/app/services/local-data";
 import { Subscription } from 'rxjs';
 import * as moment from 'moment';
+import { Workout } from "~/app/models/workout";
 
 @Component({
     selector: "History",
@@ -85,9 +86,6 @@ export class HistoryComponent {
         }
     }
 
-
-
-
     formatDateDay(date: string): string {
         return moment(date).format('DD');
     }
@@ -99,10 +97,4 @@ export class HistoryComponent {
     clearWorkouts(): void {
         this.localData.clear()
     }
-}
-
-export interface Workout {
-    workoutType: string,
-    datetime: string,
-    workoutDesc: string
 }

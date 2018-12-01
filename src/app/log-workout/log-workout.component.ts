@@ -1,9 +1,9 @@
 import { Component } from "@angular/core";
 import {LocalData} from "~/app/services/local-data";
-import { Workout } from "~/app/history/history.component";
 import * as moment from 'moment';
 import * as toast from 'nativescript-toast';
 import { Subscription } from "rxjs";
+import { Workout } from "~/app/models/workout";
 
 @Component({
     selector: "LogWorkout",

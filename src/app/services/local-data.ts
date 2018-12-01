@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import * as ApplicationSettings from "application-settings";
 import { Subject } from 'rxjs';
-import { Workout } from "~/app/history/history.component";
+import { Workout } from "~/app/models/workout";
 
 @Injectable()
 export class LocalData {
