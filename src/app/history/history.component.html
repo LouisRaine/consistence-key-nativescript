@@ -1,28 +1,99 @@
-<StackLayout class="home" height="100%" width="100%" backgroundImage="~/imgs/graph-paper.png">
-    <StackLayout class="streak-banner" borderColor="#f16d6d" borderWidth="30px" width="90%"
-    marginBottom="50px">
-        <Label class="streak-label" text="Current Streak" verticalAlignment="bottom"></Label>
-        <Label class="streak-label" text="{{ currentStreak }} {{ daysText}}" verticalAlignment="top"></Label>        
+<StackLayout
+    class="home" 
+    height="100%" 
+    width="100%" 
+    backgroundImage="~/imgs/graph-paper.png">
+    <StackLayout 
+        class="streak-banner" 
+        borderColor="#f16d6d" 
+        borderWidth="30px" 
+        width="90%"
+        marginBottom="50px">
+        <Label 
+            class="streak-label" 
+            text="Current Streak" 
+            verticalAlignment="bottom">
+        </Label>
+        <Label 
+            class="streak-label" 
+            text="{{ currentStreak }} {{ daysText}}" 
+            verticalAlignment="top">
+        </Label>        
     </StackLayout>
-    <ListView [items]="workouts" class="list-group workouts" height="60%">
-        <ng-template let-item="item">
-            <GridLayout columns="*,4*" rows="*,*" width="90%" margin="10px" height="150px">
-                <Label col="0" row="0" text="{{ formatDateMonth(item.datetime) }}"
-                paddingRight="20px" paddingTop="15px" class="workout-label"></Label>
-                <Label col="0" row="1" text="{{ formatDateDay(item.datetime) }}"
-                paddingRight="20px" paddingBottom="15px" class="workout-label"></Label>
-                <StackLayout col="1" rowSpan="2" class="workout-label" borderWidth="3px" borderColor="black"
-                borderRadius="20px" textAlignment="left" paddingLeft="30px" paddingRight="30px"
-                orientation="horizontal">
-                    <Label [class]="getColor(item.workoutType)" width="50px" text="" height="50px" marginTop="15px" marginBottom="15px"></Label>
-                    <Label [text]="item.workoutDesc" paddingLeft="10px" paddingRight="10px"></Label>
-                    <Label [class]="getColor(item.workoutType)" width="100%" text="" height="50px" marginTop="15px" marginBottom="15px"></Label>                        
+    <ListView 
+        [items]="workouts" 
+        class="list-group workouts" 
+        height="60%">
+        <ng-template 
+            let-item="item">
+            <GridLayout 
+                columns="*,4*" 
+                rows="*,*" 
+                width="90%" 
+                margin="10px" 
+                height="150px">
+                <Label 
+                    col="0" 
+                    row="0" 
+                    text="{{ formatDateMonth(item.datetime) }}"
+                    paddingRight="20px" 
+                    paddingTop="15px" 
+                    class="workout-label">
+                </Label>
+                <Label 
+                    col="0" 
+                    row="1" 
+                    text="{{ formatDateDay(item.datetime) }}"
+                    paddingRight="20px" 
+                    paddingBottom="15px" 
+                    class="workout-label">
+                </Label>
+                <StackLayout 
+                    col="1" 
+                    rowSpan="2" 
+                    class="workout-label" 
+                    borderWidth="3px" 
+                    borderColor="black"
+                    borderRadius="20px" 
+                    textAlignment="left" 
+                    paddingLeft="30px" 
+                    paddingRight="30px"
+                    orientation="horizontal">
+                    <Label 
+                        [class]="getColor(item.workoutType)" 
+                        width="50px" 
+                        text="" 
+                        height="50px" 
+                        marginTop="15px" 
+                        marginBottom="15px">
+                    </Label>
+                    <Label 
+                        [text]="item.workoutDesc" 
+                        paddingLeft="10px" 
+                        paddingRight="10px">
+                    </Label>
+                    <Label 
+                        [class]="getColor(item.workoutType)" 
+                        width="100%" 
+                        text="" 
+                        height="50px" 
+                        marginTop="15px" 
+                        marginBottom="15px">
+                    </Label>                        
                 </StackLayout>
             </GridLayout>
         </ng-template>
     </ListView>
-    <StackLayout width="90%">
-        <Button class="clear-button" text="Clear Workouts" (tap)="clearWorkouts()"
-                borderColor="#f16d6d" borderWidth="8px" borderRadius="20px" padding="12px"></Button>
+    <StackLayout 
+        width="90%">
+        <Button 
+            class="clear-button" 
+            text="Clear Workouts" 
+            (tap)="clearWorkouts()"
+            borderColor="#f16d6d" 
+            borderWidth="8px" 
+            borderRadius="20px" 
+            padding="12px">
+        </Button>
     </StackLayout>
 </StackLayout>

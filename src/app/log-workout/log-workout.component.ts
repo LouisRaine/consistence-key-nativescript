@@ -27,10 +27,12 @@ export class LogWorkoutComponent {
     }
 
     ngOnInit() {
-        this.workoutAdded = this.localDataService.localDataUpdated$.subscribe((res) => {
-            this.disableCardio = this.checkLogged('cardio');
-            this.disableWeightTraining = this.checkLogged('weightTraining');
-        });
+        this.workoutAdded = this.localDataService.localDataUpdated$
+            .subscribe((res) => {
+                this.disableCardio = this.checkLogged('cardio');
+                this.disableWeightTraining = this.checkLogged('weightTraining');
+            });
+            
         this.disableCardio = this.checkLogged('cardio');
         this.disableWeightTraining = this.checkLogged('weightTraining');
     }
@@ -38,8 +40,8 @@ export class LogWorkoutComponent {
     checkLogged(workoutType: string): boolean {
         let today = moment().format('YYYY-MM-DD');
         let storage = this.localDataService.loadData();
-        if (storage.length == 0) return false;
 
+        if (storage.length == 0) return false;
         let lastWorkoutDate = moment(storage[0].datetime).format('YYYY-MM-DD');
         let lastWorkoutType = storage[0].workoutType;
 
@@ -50,18 +52,25 @@ export class LogWorkoutComponent {
             secondedToLastWorkoutType = storage[1].workoutType;
         }
         
-        if (
-            (lastWorkoutDate == today && lastWorkoutType == workoutType) 
-            || (secondedToLastWorkoutDate == today && secondedToLastWorkoutType == workoutType)
+        if ((
+                lastWorkoutDate == today && 
+                lastWorkoutType == workoutType
+            ) || (
+                secondedToLastWorkoutDate == today && 
+                secondedToLastWorkoutType == workoutType
+            )
         ) {
             return true;
         } else {
-            return false
+            return false;
         }
     }
 
     onWorkout(): void {
-        if (!this.disableCardio || !this.disableWeightTraining) {
+        if (
+            !this.disableCardio || 
+            !this.disableWeightTraining
+        ) {
             this.workoutVisible = false;
             this.choicesVisible = true;
         } else {
@@ -102,11 +111,17 @@ export class LogWorkoutComponent {
     }
 
     presentLoggedToast() {
-        toast.makeText('Logged workout!', '1000').show();
+        toast.makeText(
+            'Logged workout!', 
+            '1000'
+        ).show();
     }
 
     presentCantLogToast() {
-        toast.makeText("You've Already Logged Your Workout", '1000').show();
+        toast.makeText(
+            "You've Already Logged Your Workout", 
+            '1000'
+        ).show();
     }
 
 }
